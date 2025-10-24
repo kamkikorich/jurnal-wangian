@@ -18,6 +18,21 @@
             padding: 30px 20px;
         }
 
+        /* ----- BARU: Kelas Animasi ----- */
+        /* Sembunyikan elemen pada mulanya */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px); /* Bergerak sedikit dari bawah */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        /* Apabila kelas 'visible' ditambah (oleh JS), ia akan muncul */
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ----- TAMAT KOD BARU ----- */
+
+
         /* BAHAGIAN HEADER (PENGENALAN) */
         header {
             text-align: center;
@@ -26,7 +41,7 @@
         header img.profile-pic {
             width: 120px;
             height: 120px;
-            border-radius: 50%; /* Membuat gambar jadi bulat */
+            border-radius: 50%;
             object-fit: cover;
             border: 4px solid #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -63,16 +78,18 @@
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            overflow: hidden; /* Memastikan gambar tidak terkeluar dari kad */
-            transition: transform 0.3s ease;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* CSS Vanilla Hebat! */
         }
         .review-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px); /* Nampak terangkat */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12); /* Bayang lebih kuat */
         }
         .review-card img {
             width: 100%;
             height: 200px;
-            object-fit: cover; /* Memastikan gambar penuh & tidak herot */
+            object-fit: cover;
+            border-bottom: 1px solid #eee; /* Garisan pemisah */
         }
         .review-card-content {
             padding: 20px;
@@ -121,7 +138,7 @@
 
     <div class="container">
 
-        <header>
+        <header class="fade-in">
             <img src="https://via.placeholder.com/120x120.png?text=Foto+Anda" alt="Gambar Profil" class="profile-pic">
             
             <h1>Jurnal Aroma Saya</h1>
@@ -131,28 +148,28 @@
         </header>
 
         <section class="reviews-section">
-            <h2>Eksplorasi Terbaru</h2>
+            <h2 class="fade-in">Eksplorasi Terbaru</h2>
             
             <div class="review-grid">
 
-                <div class="review-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Gambar+Perfume+1" alt="Perfume 1">
+                <div class="review-card fade-in">
+                    <img src="https://via.placeholder.com/300x200.png?text=Gambar+Lattafa" alt="Perfume 1">
                     <div class="review-card-content">
                         <h3>NAMA MINYAK WANGI 1</h3>
                         <p>Ulasan ringkas anda di sini. Contoh: Bau yang sangat segar, sesuai untuk cuaca panas. Tahan lama sehingga 8 jam.</p>
                     </div>
                 </div>
 
-                <div class="review-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Gambar+Perfume+2" alt="Perfume 2">
+                <div class="review-card fade-in">
+                    <img src="https://via.placeholder.com/300x200.png?text=Gambar+Armaf" alt="Perfume 2">
                     <div class="review-card-content">
                         <h3>NAMA MINYAK WANGI 2</h3>
                         <p>Ulasan ringkas anda di sini. Contoh: Aroma kayu (woody) yang maskulin. Sangat unik dan mendapat banyak pujian.</p>
                     </div>
                 </div>
 
-                <div class="review-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Gambar+Perfume+3" alt="Perfume 3">
+                <div class="review-card fade-in">
+                    <img src="https://via.placeholder.com/300x200.png?text=Gambar+Afnan" alt="Perfume 3">
                     <div class="review-card-content">
                         <h3>NAMA MINYAK WANGI 3</h3>
                         <p>Ulasan ringkas anda di sini. Anda boleh tambah kad-kad ini seberapa banyak yang anda mahu dengan copy-paste kod "review-card".</p>
@@ -164,7 +181,7 @@
 
     </div>
 
-    <footer>
+    <footer class="fade-in">
         <h2>Ikuti Perjalanan Aroma Saya</h2>
         <div>
             <a href="#" class="social-button">TikTok</a>
@@ -173,5 +190,18 @@
         </div>
     </footer>
 
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach((el, index) => {
+                // 'setTimeout' digunakan untuk memberi sedikit sela masa
+                // supaya setiap elemen muncul satu persatu
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 150); // 150ms sela masa antara setiap kemunculan
+            });
+        });
+    </script>
+    </body>
 </html>
